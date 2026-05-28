@@ -4,356 +4,85 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#4CAF50">
 <title>Laporan Jamur</title>
-<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#4CAF50">
 <style>
-* {margin:0;padding:0;box-sizing:border-box;}
-body {font-family:Arial,sans-serif;background:#f5f5f5;padding:20px;}
-</style>
-</head>
-<body>
-<h1>Laporan Jamur</h1>
-<p>Situs udah jalan</p>
-</body>
-</html>
-
-<!DOCTYPE html>
-<html lang="id">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#4CAF50">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="apple-mobile-web-app-title" content="Laporan Jamur">
-<title>Laporan Jamur</title>
-<link rel="manifest" href="manifest.json">
-<sty
-*{margin:0;padding:0;box-sizing:border-box;font-family:system-ui,sans-serif}
-body{background:#f5f5f5;padding:12px}
-.container{max-width:600px;margin:0 auto;background:#fff;padding:15px;border-radius:12px}
-h2{text-align:center;margin-bottom:12px;font-size:18px}
-.tab{display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap}
-.tab button{flex:1;padding:10px;border:none;border-radius:8px;background:#e0e0e0;font-size:14px}
-.tab button.active{background:#4CAF50;color:#fff}
-input,select,textarea{width:100%;padding:10px;margin:6px 0;border:1px solid #ddd;border-radius:8px;font-size:15px}
-textarea{min-height:60px}
-table{width:100%;border-collapse:collapse;margin:10px 0}
-th,td{border:1px solid #ddd;padding:8px;text-align:center;font-size:13px}
-th{background:#f0f0f0}
-.btn{width:100%;padding:12px;margin:6px 0;border:none;border-radius:8px;background:#4CAF50;color:#fff;font-size:15px}
-.btn-danger{background:#f44336}
-.btn-secondary{background:#2196F3}
-.btn-orange{background:#ff9800}
-.btn-gray{background:#757575}
-.hasil{margin-top:15px;white-space:pre-line;line-height:1.8;display:none;background:#f9f9f9;padding:12px;border-radius:12px;font-size:14px}
-.hasil.show{display:block}
-.scroll{max-height:300px;overflow-y:auto}
-label{font-size:13px;color:#555;margin-top:8px;display:block}
-.small{font-size:12px;color:#777}
-.row{display:flex;gap:8px}
-.row input{flex:1}
-.install-hint{font-size:12px;color:#4CAF50;text-align:center;margin:8px 0;display:none}
+* { box-sizing: border-box; font-family: Arial, sans-serif; }
+body { background: #f5f5f5; padding: 15px; margin: 0; }
+.container { max-width: 600px; margin: auto; background: white; padding: 20px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+h1 { color: #4CAF50; text-align: center; margin-top: 0; }
+input, button, select { width: 100%; padding: 12px; margin: 8px 0; border: 1px solid #ddd; border-radius: 6px; font-size: 16px; }
+button { background: #4CAF50; color: white; border: none; cursor: pointer; font-weight: bold; }
+button:hover { background: #45a049; }
+.tabs { display: flex; gap: 5px; margin-bottom: 15px; }
+.tabs button { flex: 1; background: #eee; color: #333; }
+.tabs button.active { background: #4CAF50; color: white; }
+table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+th, td { border: 1px solid #ddd; padding: 8px; text-align: left; font-size: 14px; }
+th { background: #4CAF50; color: white; }
+.info { background: #e8f5e9; padding: 10px; border-radius: 6px; margin-bottom: 15px; font-size: 14px; }
 </style>
 </head>
 <body>
 <div class="container">
-<h2>Laporan Jamur</h2>
-<p class="install-hint" id="installHint">💡 Buka menu Chrome > "Install app" biar jadi app</p>
+<h1>🍄 Laporan Jamur</h1>
 
-<div class="tab">
-<button id="tabHarian" class="active" onclick="setTab('harian')">Input Harian</button>
-<button id="tabBulanan" onclick="setTab('bulanan')">Laporan Bulanan</button>
-<button id="tabTahunan" onclick="setTab('tahunan')">Laporan Tahunan</button>
+<div class="info">
+Buka menu Chrome > <b>Install app</b> biar jadi aplikasi di HP kamu
 </div>
 
-<div id="pageHarian">
-<input type="date" id="tgl">
-<label>Jamur (kg)</label>
-<input type="number" id="jamur" placeholder="100">
-<label>Pendapatan</label>
-<input type="text" id="pend" placeholder="Ketikan 1000000 jadi 1.000.000" oninput="formatRupiah(this)">
-<label>Operasional</label>
-<div class="scroll">
-<table id="tabelOp">
-<tr><th>Keterangan</th><th>Jumlah</th><th></th></tr>
-<tr>
-<td><input type="text" placeholder="gaji"></td>
-<td><input type="text" placeholder="2000000" oninput="formatRupiah(this)"></td>
-<td><button onclick="hapusBaris(this)">X</button></td>
-</tr>
-</table>
-</div>
-<button class="btn btn-orange" onclick="tambahBaris()">+ Tambah Operasional</button>
-<label>Catatan Harian</label>
-<textarea id="catatan" placeholder="Catatan nggak bakal hilang"></textarea>
-<button class="btn" onclick="simpanHarian()">Simpan Hari Ini</button>
-<button class="btn btn-danger" onclick="resetHarian()">Reset Hari Ini</button>
-<p class="small">Data otomatis ke localStorage. Tutup aplikasi aman.</p>
+<div class="tabs">
+<button class="active" onclick="showTab('harian')">Input Harian</button>
+<button onclick="showTab('bulanan')">Laporan Bulanan</button>
+<button onclick="showTab('tahunan')">Laporan Tahunan</button>
 </div>
 
-<div id="pageBulanan" style="display:none">
-<select id="bulan"></select>
-<button class="btn" onclick="buatLaporanBulanan()">Buat Laporan Bulanan</button>
-<div id="hasilBulanan" class="hasil"></div>
-<button class="btn btn-secondary" onclick="shareWA(document.getElementById('hasilBulanan').innerText)" id="btnWABulanan" style="display:none">Kirim ke WhatsApp</button>
-<button class="btn btn-secondary" onclick="shareDrive(document.getElementById('hasilBulanan').innerText)" id="btnDriveBulanan" style="display:none">Simpan ke Drive</button>
+<div id="harian">
+<input type="date" id="tanggal">
+<input type="number" id="jamur" placeholder="Jamur (kg)">
+<input type="number" id="pendapatan" placeholder="Pendapatan">
+<input type="number" id="operasional" placeholder="Biaya Operasional">
+<input type="text" id="keterangan" placeholder="Keterangan">
+<button onclick="simpan()">Simpan Hari Ini</button>
+<button onclick="resetHari()" style="background:#f44336;">Reset Hari Ini</button>
 </div>
 
-<div id="pageTahunan" style="display:none">
-<select id="tahun"></select>
-<button class="btn" onclick="buatLaporanTahunan()">Buat Laporan Tahunan</button>
-<div id="hasilTahunan" class="hasil"></div>
-<button class="btn btn-secondary" onclick="shareWA(document.getElementById('hasilTahunan').innerText)" id="btnWATahunan" style="display:none">Kirim ke WhatsApp</button>
-<button class="btn btn-secondary" onclick="shareDrive(document.getElementById('hasilTahunan').innerText)" id="btnDriveTahunan" style="display:none">Simpan ke Drive</button>
-<button class="btn btn-danger" onclick="backup()" id="btnBackupTahunan" style="display:none">Backup Data</button>
-<button class="btn btn-danger" onclick="resetTahun()" id="btnResetTahun" style="display:none">Reset Tahun Ini</button>
+<div id="bulanan" style="display:none;">
+<p>Data bulan ini akan muncul di sini</p>
 </div>
 
-<div class="row">
-<input type="file" id="restoreFile" accept=".json" style="display:none" onchange="restoreData(event)">
-<button class="btn btn-gray" onclick="document.getElementById('restoreFile').click()">Restore Data</button>
+<div id="tahunan" style="display:none;">
+<p>Data tahunan akan muncul di sini</p>
 </div>
 </div>
 
 <script>
-if('serviceWorker' in navigator){
-const swCode = `
-self.addEventListener('install', e => self.skipWaiting());
-self.addEventListener('fetch', e => {
-e.respondWith(fetch(e.request).catch(() => caches.match(e.request)));
-});
-`;
-const blob = new Blob([swCode], {type: 'text/javascript'});
-navigator.serviceWorker.register(URL.createObjectURL(blob));
+document.getElementById('tanggal').valueAsDate = new Date();
+
+function showTab(tab) {
+document.getElementById('harian').style.display = tab === 'harian' ? 'block' : 'none';
+document.getElementById('bulanan').style.display = tab === 'bulanan' ? 'block' : 'none';
+document.getElementById('tahunan').style.display = tab === 'tahunan' ? 'block' : 'none';
 }
 
-window.onload=function(){
-document.getElementById('tgl').value=new Date().toISOString().split('T')[0];
-setBulan();
-setTahun();
-kosongkanForm();
-if(!window.matchMedia('(display-mode: standalone)').matches){
-document.getElementById('installHint').style.display='block';
-}
-}
-
-function setTab(t){
-document.getElementById('tabHarian').classList.toggle('active',t==='harian');
-document.getElementById('tabBulanan').classList.toggle('active',t==='bulanan');
-document.getElementById('tabTahunan').classList.toggle('active',t==='tahunan');
-document.getElementById('pageHarian').style.display=t==='harian'?'block':'none';
-document.getElementById('pageBulanan').style.display=t==='bulanan'?'block':'none';
-document.getElementById('pageTahunan').style.display=t==='tahunan'?'block':'none';
-if(t!=='tahunan'){
-document.getElementById('btnResetTahun').style.display='none';
-}
-}
-
-function kosongkanForm(){
-document.getElementById('jamur').value='';
-document.getElementById('pend').value='';
-document.getElementById('catatan').value='';
-document.getElementById('tabelOp').innerHTML='<tr><th>Keterangan</th><th>Jumlah</th><th></th></tr><tr><td><input type="text" placeholder="gaji"></td><td><input type="text" placeholder="2000000" oninput="formatRupiah(this)"></td><td><button onclick="hapusBaris(this)">X</button></td></tr>';
-}
-
-function setBulan(){
-let sel=document.getElementById('bulan');
-sel.innerHTML='';
-let now=new Date();
-for(let i=0;i<12;i++){
-let d=new Date(now.getFullYear(),now.getMonth()-i,1);
-let val=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0');
-let txt=d.toLocaleString('id-ID',{month:'long',year:'numeric'});
-sel.innerHTML+=`<option value="${val}">${txt}</option>`;
-}
-}
-
-function setTahun(){
-let sel=document.getElementById('tahun');
-sel.innerHTML='';
-let now=new Date();
-for(let i=0;i<5;i++){
-let thn=now.getFullYear()-i;
-sel.innerHTML+=`<option value="${thn}">${thn}</option>`;
-}
-}
-
-function formatRupiah(el){
-let v=el.value.replace(/[^0-9]/g,'');
-if(v)el.value=new Intl.NumberFormat('id-ID').format(v);
-}
-
-function tambahBaris(){
-let tr=document.getElementById('tabelOp').insertRow();
-tr.innerHTML=`<td><input type="text" placeholder="keterangan"></td>
-<td><input type="text" placeholder="100000" oninput="formatRupiah(this)"></td>
-<td><button onclick="hapusBaris(this)">X</button></td>`;
-}
-
-function hapusBaris(btn){
-btn.closest('tr').remove();
-}
-
-function simpanHarian(){
-let tgl=document.getElementById('tgl').value;
-if(!tgl)return alert('Pilih tanggal');
-let data={
-jamur:document.getElementById('jamur').value,
-pend:document.getElementById('pend').value,
-catatan:document.getElementById('catatan').value,
-op:[]
+function simpan() {
+let data = {
+tanggal: document.getElementById('tanggal').value,
+jamur: document.getElementById('jamur').value,
+pendapatan: document.getElementById('pendapatan').value,
+operasional: document.getElementById('operasional').value,
+keterangan: document.getElementById('keterangan').value
 };
-let rows=document.querySelectorAll('#tabelOp tr');
-for(let i=1;i<rows.length;i++){
-let ket=rows[i].cells[0].querySelector('input').value;
-let jml=rows[i].cells[1].querySelector('input').value;
-if(ket||jml)data.op.push({ket,jml});
-}
-let all=JSON.parse(localStorage.getItem('jamurData')||'{}');
-all[tgl]=data;
-localStorage.setItem('jamurData',JSON.stringify(all));
-alert('Tersimpan!');
+localStorage.setItem('laporan_' + data.tanggal, JSON.stringify(data));
+alert('Data tersimpan!');
 }
 
-function loadHarian(){
-let tgl=document.getElementById('tgl').value;
-let all=JSON.parse(localStorage.getItem('jamurData')||'{}');
-let d=all[tgl];
-if(!d){
-kosongkanForm();
-return;
+function resetHari() {
+if(confirm('Hapus data hari ini?')) {
+localStorage.removeItem('laporan_' + document.getElementById('tanggal').value);
+alert('Data direset!');
 }
-document.getElementById('jamur').value=d.jamur||'';
-document.getElementById('pend').value=d.pend||'';
-document.getElementById('catatan').value=d.catatan||'';
-document.getElementById('tabelOp').innerHTML='<tr><th>Keterangan</th><th>Jumlah</th><th></th></tr>';
-(d.op||[]).forEach(o=>{
-let tr=document.getElementById('tabelOp').insertRow();
-tr.innerHTML=`<td><input type="text" value="${o.ket}"></td>
-<td><input type="text" value="${o.jml}" oninput="formatRupiah(this)"></td>
-<td><button onclick="hapusBaris(this)">X</button></td>`;
-});
 }
-
-function resetHarian(){
-if(!confirm('Hapus data hari ini?'))return;
-let tgl=document.getElementById('tgl').value;
-let all=JSON.parse(localStorage.getItem('jamurData')||'{}');
-delete all[tgl];
-localStorage.setItem('jamurData',JSON.stringify(all));
-kosongkanForm();
-}
-
-function buatLaporanBulanan(){
-let bulan=document.getElementById('bulan').value;
-if(!bulan)return alert('Pilih bulan');
-let all=JSON.parse(localStorage.getItem('jamurData')||'{}');
-let totalJamur=0,totalPend=0,totalOp=0;
-Object.keys(all).forEach(tgl=>{
-if(tgl.startsWith(bulan)){
-let d=all[tgl];
-totalJamur+=parseFloat(d.jamur)||0;
-totalPend+=parseFloat((d.pend||'').replace(/\./g,''))||0;
-(d.op||[]).forEach(o=>{
-totalOp+=parseFloat((o.jml||'').replace(/\./g,''))||0;
-});
-}
-});
-let d=new Date(bulan.split('-')[0],bulan.split('-')[1]-1);
-let bulanTxt=d.toLocaleString('id-ID',{month:'long',year:'numeric'});
-let teks=`Laporan Bulanan ${bulanTxt}\n\n`;
-teks+=`Total Jamur = ${totalJamur} kg\n`;
-teks+=`Total Pendapatan = ${new Intl.NumberFormat('id-ID').format(totalPend)}\n`;
-teks+=`Total Operasional = ${new Intl.NumberFormat('id-ID').format(totalOp)}\n\n`;
-teks+=`Laba Bersih\n${new Intl.NumberFormat('id-ID').format(totalPend-totalOp)}`;
-document.getElementById('hasilBulanan').innerText=teks;
-document.getElementById('hasilBulanan').classList.add('show');
-document.getElementById('btnWABulanan').style.display='block';
-document.getElementById('btnDriveBulanan').style.display='block';
-}
-
-function buatLaporanTahunan(){
-let tahun=document.getElementById('tahun').value;
-if(!tahun)return alert('Pilih tahun');
-let all=JSON.parse(localStorage.getItem('jamurData')||'{}');
-let totalJamur=0,totalPend=0,totalOp=0;
-Object.keys(all).forEach(tgl=>{
-if(tgl.startsWith(tahun)){
-let d=all[tgl];
-totalJamur+=parseFloat(d.jamur)||0;
-totalPend+=parseFloat((d.pend||'').replace(/\./g,''))||0;
-(d.op||[]).forEach(o=>{
-totalOp+=parseFloat((o.jml||'').replace(/\./g,''))||0;
-});
-}
-});
-let teks=`Laporan Tahunan ${tahun}\n\n`;
-teks+=`Total Jamur = ${totalJamur} kg\n`;
-teks+=`Total Pendapatan = ${new Intl.NumberFormat('id-ID').format(totalPend)}\n`;
-teks+=`Total Operasional = ${new Intl.NumberFormat('id-ID').format(totalOp)}\n\n`;
-teks+=`Laba Bersih\n${new Intl.NumberFormat('id-ID').format(totalPend-totalOp)}`;
-document.getElementById('hasilTahunan').innerText=teks;
-document.getElementById('hasilTahunan').classList.add('show');
-document.getElementById('btnWATahunan').style.display='block';
-document.getElementById('btnDriveTahunan').style.display='block';
-document.getElementById('btnBackupTahunan').style.display='block';
-document.getElementById('btnResetTahun').style.display='block';
-}
-
-function shareWA(txt){
-window.open(`https://wa.me/?text=${encodeURIComponent(txt)}`);
-}
-
-function shareDrive(txt){
-window.open(`https://drive.google.com/drive/search?q=${encodeURIComponent(txt.substring(0,50))}`);
-}
-
-function backup(){
-let data=localStorage.getItem('jamurData');
-let blob=new Blob([data],{type:'application/json'});
-let a=document.createElement('a');
-a.href=URL.createObjectURL(blob);
-a.download='backup-jamur.json';
-a.click();
-}
-
-function restoreData(event){
-let file=event.target.files[0];
-if(!file)return;
-let reader=new FileReader();
-reader.onload=function(e){
-try{
-let data=JSON.parse(e.target.result);
-localStorage.setItem('jamurData',JSON.stringify(data));
-alert('Restore berhasil! Tutup buka lagi aplikasinya.');
-kosongkanForm();
-}catch(err){
-alert('File backup rusak!');
-}
-};
-reader.readAsText(file);
-}
-
-function resetTahun(){
-let tahun=document.getElementById('tahun').value;
-if(!tahun)return alert('Pilih tahun dulu');
-if(!confirm(`HAPUS SEMUA DATA TAHUN ${tahun}? Nggak bisa di-undo!`))return;
-let all=JSON.parse(localStorage.getItem('jamurData')||'{}');
-Object.keys(all).forEach(tgl=>{
-if(tgl.startsWith(tahun))delete all[tgl];
-});
-localStorage.setItem('jamurData',JSON.stringify(all));
-document.getElementById('hasilTahunan').classList.remove('show');
-document.getElementById('btnWATahunan').style.display='none';
-document.getElementById('btnDriveTahunan').style.display='none';
-document.getElementById('btnBackupTahunan').style.display='none';
-document.getElementById('btnResetTahun').style.display='none';
-alert(`Data tahun ${tahun} sudah dihapus. Mulai dari 0 lagi.`);
-}
-
-document.getElementById('tgl').addEventListener('change',loadHarian);
 </script>
 </body>
 </html>
